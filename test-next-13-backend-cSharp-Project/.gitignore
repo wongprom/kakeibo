@@ -1,0 +1,44 @@
+# Build output
+bin/
+obj/
+out/
+
+# IDE / Rider / VS Code
+.idea/
+.vscode/
+*.iml
+*.user
+*.suo
+*.csproj.user
+
+# Temp/test files
+*.log
+*.tmp
+*.lock
+*.bak
+*~
+*.map
+*.http
+.DS_Store
+scratches/
+
+# Runtime
+*.dll
+*.pdb
+*.exe
+
+# Secrets & environment
+.env
+secrets.json
+**/appsettings.Development.json
+Properties/launchSettings.json
+
+# NuGet packages
+*.nupkg
+*.snupkg
+
+# Node / frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
