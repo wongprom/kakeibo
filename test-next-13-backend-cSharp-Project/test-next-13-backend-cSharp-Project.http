@@ -1,0 +1,6 @@
+@test_next_13_backend_cSharp_Project_HostAddress = http://localhost:5259
+
+GET {{test_next_13_backend_cSharp_Project_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
