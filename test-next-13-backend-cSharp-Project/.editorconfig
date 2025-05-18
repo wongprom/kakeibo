@@ -6,8 +6,18 @@ indent_size = 4
 insert_final_newline = true
 dotnet_sort_system_directives_first = true
 dotnet_separate_import_directive_groups = true
+
 csharp_new_line_before_open_brace = all
 csharp_indent_case_contents = true
 csharp_indent_switch_labels = true
 csharp_preserve_single_line_statements = false
 csharp_preserve_single_line_blocks = false
+
+# --- JetBrains Rider / ReSharper ---
+# keep simple auto-properties on one line
+resharper_csharp_place_simple_accessorholder_on_single_line = true
+resharper_csharp_place_simple_accessor_on_single_line = true
+resharper_csharp_place_abstract_accessorholder_on_single_line = true
+
+# keep the *attribute* on its own line
+resharper_csharp_place_accessorholder_attribute_on_same_line = false
