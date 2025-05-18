@@ -1,9 +1,9 @@
 // Program.cs
 
 using Microsoft.EntityFrameworkCore;
-
 using test_next_13_backend_cSharp_Project.Data;
 using test_next_13_backend_cSharp_Project.GraphQL;
+using test_next_13_backend_cSharp_Project.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,12 +24,15 @@ string conn =
 builder.Services.AddDbContext<KakeiboDbContext>(options =>
     options.UseNpgsql(conn));
 
+builder.Services.AddAutoMapper(typeof(UserProfile));
+
 /* ----------------------------------------------------------
  * 3️⃣  GraphQL
  * ---------------------------------------------------------- */
 builder.Services
     .AddGraphQLServer()
-    .AddQueryType<Query>();
+    .AddQueryType<Query>()
+    .AddMutationType<Mutation>();
 
 var app = builder.Build();
 
