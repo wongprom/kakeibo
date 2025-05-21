@@ -6,14 +6,21 @@ using Microsoft.EntityFrameworkCore;
 
 public class KakeiboDbContext : DbContext
 {
-  public KakeiboDbContext(DbContextOptions<KakeiboDbContext> options) : base(options)
-  {
-  }
+    public KakeiboDbContext(DbContextOptions<KakeiboDbContext> options) : base(options)
+    {
+    }
 
-  public DbSet<User> Users { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Budget> Budgets { get; set; }
 
-  protected override void OnModelCreating(ModelBuilder modelBuilder)
-  {
-    modelBuilder.Entity<User>().ToTable("User");
-  }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Budget>(b =>
+        {
+            b.Property(e => e.UpdatedAt)
+                .HasColumnName("updated_at")
+                .HasDefaultValueSql("now()")           // default on INSERT
+                .ValueGeneratedOnAddOrUpdate();        // auto‐update on UPDATE
+        });
+    }
 }

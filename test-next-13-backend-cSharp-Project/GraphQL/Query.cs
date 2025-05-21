@@ -32,11 +32,29 @@ public class Mutation
         _mapper = mapper;
     }
 
+    // User
     public async Task<UserDto> CreateUser(CreateUserDto input)
     {
         var entity = _mapper.Map<User>(input);
         _db.Users.Add(entity);
         await _db.SaveChangesAsync();
         return _mapper.Map<UserDto>(entity);
+    }
+
+    // Budget
+    public IQueryable<BudgetDto> GetBudgets() =>
+        _mapper.ProjectTo<BudgetDto>(_db.Budgets);
+
+    public async Task<BudgetDto> CreateBudget(CreateBudgetDto input)
+    {
+        var budget = _mapper.Map<Budget>(input);
+
+        int daysInMonth = DateTime.DaysInMonth(input.Date.Year, input.Date.Month);
+        budget.NumOfWeeks = daysInMonth / 7 + (daysInMonth % 7 > 0 ? 1 : 0);
+
+        // 3. Persist & return DTO
+        _db.Budgets.Add(budget);
+        await _db.SaveChangesAsync();
+        return _mapper.Map<BudgetDto>(budget);
     }
 }
