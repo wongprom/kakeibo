@@ -16,7 +16,7 @@ namespace test_next_13_backend_cSharp_Project.Models.Entities
 
         // When the row was created (filled by DB)
         [Column("created_at")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime CreatedAt { get; private set; }
 
         // Last time the row was modified

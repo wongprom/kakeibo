@@ -15,13 +15,21 @@ public class KakeiboDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // Budget
         modelBuilder.Entity<Budget>(b =>
         {
+            b.Property(x => x.CreatedAt)
+                .HasColumnName("created_at")
+                .HasDefaultValueSql("now()")
+                .ValueGeneratedOnAdd();
+
             b.Property(e => e.UpdatedAt)
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("now()") // default on INSERT
                 .ValueGeneratedOnAddOrUpdate(); // auto‐update on UPDATE
         });
+
+        // User
         modelBuilder.Entity<User>(u =>
         {
             u.Property(x => x.CreatedAt)
