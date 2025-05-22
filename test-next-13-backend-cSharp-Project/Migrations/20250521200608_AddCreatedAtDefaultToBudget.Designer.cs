@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using test_next_13_backend_cSharp_Project.Data;
@@ -11,9 +12,11 @@ using test_next_13_backend_cSharp_Project.Data;
 namespace test_next_13_backend_cSharp_Project.Migrations
 {
     [DbContext(typeof(KakeiboDbContext))]
-    partial class KakeiboDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250521200608_AddCreatedAtDefaultToBudget")]
+    partial class AddCreatedAtDefaultToBudget
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

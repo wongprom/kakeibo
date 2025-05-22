@@ -8,53 +8,47 @@ namespace test_next_13_backend_cSharp_Project.GraphQL;
 
 public class Query
 {
-    private readonly IMapper _mapper;
-    private readonly KakeiboDbContext _db;
-
-    public Query(KakeiboDbContext db, IMapper mapper)
+    public IQueryable<UserDto> GetUsers(
+        [Service] KakeiboDbContext db,
+        [Service] IMapper mapper)
     {
-        _db = db;
-        _mapper = mapper;
+        return mapper.ProjectTo<UserDto>(db.Users);
     }
 
-    public IQueryable<UserDto> GetUsers() =>
-        _mapper.ProjectTo<UserDto>(_db.Users);
+    public IQueryable<BudgetDto> GetBudgets(
+        [Service] KakeiboDbContext db,
+        [Service] IMapper mapper)
+    {
+        return mapper.ProjectTo<BudgetDto>(db.Budgets);
+    }
 }
 
 public class Mutation
 {
-    private readonly IMapper _mapper;
-    private readonly KakeiboDbContext _db;
-
-    public Mutation(KakeiboDbContext db, IMapper mapper)
+    public async Task<UserDto> CreateUser(
+        CreateUserDto input,
+        [Service] KakeiboDbContext db,
+        [Service] IMapper mapper)
     {
-        _db = db;
-        _mapper = mapper;
+        var entity = mapper.Map<User>(input);
+        db.Users.Add(entity);
+        await db.SaveChangesAsync();
+        return mapper.Map<UserDto>(entity);
     }
 
-    // User
-    public async Task<UserDto> CreateUser(CreateUserDto input)
+    public async Task<BudgetDto> CreateBudget(
+        CreateBudgetDto input,
+        [Service] KakeiboDbContext db,
+        [Service] IMapper mapper)
     {
-        var entity = _mapper.Map<User>(input);
-        _db.Users.Add(entity);
-        await _db.SaveChangesAsync();
-        return _mapper.Map<UserDto>(entity);
-    }
+        var entity = mapper.Map<Budget>(input);
 
-    // Budget
-    public IQueryable<BudgetDto> GetBudgets() =>
-        _mapper.ProjectTo<BudgetDto>(_db.Budgets);
-
-    public async Task<BudgetDto> CreateBudget(CreateBudgetDto input)
-    {
-        var budget = _mapper.Map<Budget>(input);
-
+        // compute NumOfWeeks
         int daysInMonth = DateTime.DaysInMonth(input.Date.Year, input.Date.Month);
-        budget.NumOfWeeks = daysInMonth / 7 + (daysInMonth % 7 > 0 ? 1 : 0);
+        entity.NumOfWeeks = daysInMonth / 7 + (daysInMonth % 7 > 0 ? 1 : 0);
 
-        // 3. Persist & return DTO
-        _db.Budgets.Add(budget);
-        await _db.SaveChangesAsync();
-        return _mapper.Map<BudgetDto>(budget);
+        db.Budgets.Add(entity);
+        await db.SaveChangesAsync();
+        return mapper.Map<BudgetDto>(entity);
     }
 }
