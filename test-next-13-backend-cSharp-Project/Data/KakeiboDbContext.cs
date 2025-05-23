@@ -27,6 +27,11 @@ public class KakeiboDbContext : DbContext
                 .HasColumnName("updated_at")
                 .HasDefaultValueSql("now()") // default on INSERT
                 .ValueGeneratedOnAddOrUpdate(); // auto‐update on UPDATE
+            
+            // Define relationship: Budget → User (many-to-one)
+            b.HasOne(c => c.User)
+                .WithMany(u => u.Budgets)
+                .HasForeignKey(c => c.UserId);
         });
 
         // User

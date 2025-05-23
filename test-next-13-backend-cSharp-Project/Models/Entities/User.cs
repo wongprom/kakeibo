@@ -21,4 +21,6 @@ public class User
     [Column("created_at")]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public DateTime CreatedAt { get; private set; }
+    
+    public ICollection<Budget> Budgets { get; set; } = new List<Budget>();
 }
