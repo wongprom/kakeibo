@@ -30,6 +30,8 @@ scratches/
 # Secrets & environment
 .env
 secrets.json
+test-next-13-backend-cSharp-Project/appsettings.Development.json
+appsettings.Development.json
 **/appsettings.Development.json
 Properties/launchSettings.json
 
