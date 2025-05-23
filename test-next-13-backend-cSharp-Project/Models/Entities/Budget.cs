@@ -12,7 +12,7 @@ namespace test_next_13_backend_cSharp_Project.Models.Entities
 
         // The budget’s target date (the month/day you’re budgeting)
         [Column("date")]
-        public DateTime Date { get; set; }
+        public required DateTime Date { get; set; }
 
         // When the row was created (filled by DB)
         [Column("created_at")]

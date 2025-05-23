@@ -41,6 +41,15 @@ public class Query
     {
         return mapper.ProjectTo<BudgetDto>(db.Budgets);
     }
+    public IQueryable<BudgetDto> GetBudgetsByUserId(
+        int userId,
+        [Service] KakeiboDbContext db,
+        [Service] IMapper mapper)
+    {
+        return mapper.ProjectTo<BudgetDto>(
+            db.Budgets.Where(b => b.UserId == userId)
+        );
+    }
 }
 
 public class Mutation
