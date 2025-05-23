@@ -3,3 +3,5 @@ obj/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
+appsettings.Development.json
+test-next-13-backend-cSharp-Project/appsettings.Development.json
