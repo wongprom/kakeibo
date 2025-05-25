@@ -1,6 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test-next-13-backend-cSharp-Project", "test-next-13-backend-cSharp-Project\test-next-13-backend-cSharp-Project.csproj", "{6B6FE458-DCF5-4664-B8CB-7CAABC16CDED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kakeibo.Tests", "Kakeibo.Tests\Kakeibo.Tests.csproj", "{DDFB2A85-3DA1-4FB6-956A-05B9E27E2710}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +15,9 @@ Global
 		{6B6FE458-DCF5-4664-B8CB-7CAABC16CDED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B6FE458-DCF5-4664-B8CB-7CAABC16CDED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B6FE458-DCF5-4664-B8CB-7CAABC16CDED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDFB2A85-3DA1-4FB6-956A-05B9E27E2710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDFB2A85-3DA1-4FB6-956A-05B9E27E2710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDFB2A85-3DA1-4FB6-956A-05B9E27E2710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDFB2A85-3DA1-4FB6-956A-05B9E27E2710}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

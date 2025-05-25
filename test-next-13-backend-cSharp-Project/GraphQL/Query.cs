@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using test_next_13_backend_cSharp_Project.Data;
 using test_next_13_backend_cSharp_Project.DTOs;
 using test_next_13_backend_cSharp_Project.Models.Entities;
+using test_next_13_backend_cSharp_Project.Utils;
 
 namespace test_next_13_backend_cSharp_Project.GraphQL;
 
@@ -41,6 +42,7 @@ public class Query
     {
         return mapper.ProjectTo<BudgetDto>(db.Budgets);
     }
+
     public IQueryable<BudgetDto> GetBudgetsByUserId(
         int userId,
         [Service] KakeiboDbContext db,
@@ -72,9 +74,8 @@ public class Mutation
     {
         var entity = mapper.Map<Budget>(input);
 
-        // compute NumOfWeeks
-        int daysInMonth = DateTime.DaysInMonth(input.Date.Year, input.Date.Month);
-        entity.NumOfWeeks = daysInMonth / 7 + (daysInMonth % 7 > 0 ? 1 : 0);
+        entity.NumOfWeeks =
+            BudgetUtils.CalculateWeeksInMonth(input.Date.Year, input.Date.Month);
 
         db.Budgets.Add(entity);
         await db.SaveChangesAsync();
