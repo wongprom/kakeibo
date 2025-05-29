@@ -11,5 +11,6 @@ public sealed record BudgetDto(
     decimal SavingsGoal,
     string? SavingsGoalDescription,
     string? Notes,
-    int UserId
+    int UserId,
+    List<IncomeDto> Incomes
 );

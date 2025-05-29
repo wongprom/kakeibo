@@ -54,5 +54,10 @@ namespace test_next_13_backend_cSharp_Project.Models.Entities
 
         // Navigation back to User
         public User User { get; set; } = default!;
+
+        // foreign key
+        public int? IncomeId { get; set; }
+
+        public ICollection<Income> Incomes { get; set; } = new List<Income>();
     }
 }
