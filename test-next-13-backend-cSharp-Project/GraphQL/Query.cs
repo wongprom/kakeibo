@@ -43,6 +43,36 @@ public class Query
         return mapper.ProjectTo<BudgetDto>(db.Budgets);
     }
 
+    public class Mutation
+    {
+        public async Task<UserDto> CreateUser(
+            CreateUserDto input,
+            [Service] KakeiboDbContext db,
+            [Service] IMapper mapper)
+        {
+            var entity = mapper.Map<User>(input);
+            db.Users.Add(entity);
+            await db.SaveChangesAsync();
+            return mapper.Map<UserDto>(entity);
+        }
+
+        public async Task<BudgetDto> CreateBudget(
+            CreateBudgetDto input,
+            [Service] KakeiboDbContext db,
+            [Service] IMapper mapper)
+        {
+            var entity = mapper.Map<Budget>(input);
+
+            entity.NumOfWeeks =
+                BudgetUtils.CalculateWeeksInMonth(input.Date.Year, input.Date.Month);
+
+            db.Budgets.Add(entity);
+            await db.SaveChangesAsync();
+            return mapper.Map<BudgetDto>(entity);
+        }
+    }
+
+
     public IQueryable<BudgetDto> GetBudgetsByUserId(
         int userId,
         [Service] KakeiboDbContext db,
