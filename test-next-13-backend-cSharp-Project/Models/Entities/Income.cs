@@ -16,7 +16,7 @@ public class Income
     public required decimal Amount { get; set; }
 
     // When do you expect to get Amount? YYYY-MM-DD
-    public DateTime ReceivedAmountDate { get; set; }
+    public DateOnly ReceivedAmountDate { get; set; }
 
     public int BudgetId { get; set; } // Required FK
 

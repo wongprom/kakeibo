@@ -1,8 +1,8 @@
 namespace test_next_13_backend_cSharp_Project.DTOs;
 
-public sealed record IncomeDto(
-    int Id,
+public sealed record CreateIncomeDto(
     string Source,
     decimal Amount,
-    DateOnly ReceivedAmountDate
+    DateOnly ReceivedAmountDate,
+    int BudgetId
 );
