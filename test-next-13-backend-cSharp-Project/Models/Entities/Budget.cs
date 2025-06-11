@@ -59,5 +59,7 @@ namespace test_next_13_backend_cSharp_Project.Models.Entities
         public int? IncomeId { get; set; }
 
         public ICollection<Income> Incomes { get; set; } = new List<Income>();
+
+        public ICollection<FixedExpense> FixedExpenses { get; set; } = new List<FixedExpense>();
     }
 }

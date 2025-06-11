@@ -13,6 +13,7 @@ public class KakeiboDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Budget> Budgets { get; set; }
     public DbSet<Income> Incomes { get; set; }
+    public DbSet<FixedExpense> FixedExpenses { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -41,6 +42,13 @@ public class KakeiboDbContext : DbContext
             .HasOne(i => i.Budget)
             .WithMany(bu => bu.Incomes)
             .HasForeignKey(i => i.BudgetId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // FixedExpense
+        modelBuilder.Entity<FixedExpense>()
+            .HasOne(f => f.Budget)
+            .WithMany(b => b.FixedExpenses)
+            .HasForeignKey(f => f.BudgetId)
             .OnDelete(DeleteBehavior.Cascade);
 
         // User
