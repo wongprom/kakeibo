@@ -25,7 +25,8 @@ string conn =
 builder.Services.AddDbContext<KakeiboDbContext>(options =>
     options.UseNpgsql(conn));
 
-builder.Services.AddAutoMapper(typeof(UserProfile), typeof(BudgetProfile), typeof(IncomeProfile));
+builder.Services.AddAutoMapper(typeof(UserProfile), typeof(BudgetProfile), typeof(IncomeProfile),
+    typeof(FixedExpenseProfile));
 
 /* ----------------------------------------------------------
  * 3️⃣  GraphQL
