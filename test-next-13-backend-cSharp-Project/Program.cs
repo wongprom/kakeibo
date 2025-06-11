@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 using test_next_13_backend_cSharp_Project.Data;
 using test_next_13_backend_cSharp_Project.GraphQL;
+using test_next_13_backend_cSharp_Project.GraphQL.Mutations;
+using test_next_13_backend_cSharp_Project.GraphQL.Queries;
 using test_next_13_backend_cSharp_Project.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,8 +35,12 @@ builder.Services.AddAutoMapper(typeof(UserProfile), typeof(BudgetProfile), typeo
  * ---------------------------------------------------------- */
 builder.Services
     .AddGraphQLServer()
-    .AddQueryType<Query>()
-    .AddMutationType<Mutation>();
+    .AddQueryType(d => d.Name("Query"))
+    .AddTypeExtension<UserQuery>()
+    .AddTypeExtension<BudgetQuery>()
+    .AddMutationType(d => d.Name("Mutation"))
+    .AddTypeExtension<UserMutation>()
+    .AddTypeExtension<BudgetMutation>();
 
 var app = builder.Build();
 
