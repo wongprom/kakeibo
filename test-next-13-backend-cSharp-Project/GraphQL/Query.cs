@@ -111,4 +111,16 @@ public class Mutation
         await db.SaveChangesAsync();
         return mapper.Map<BudgetDto>(entity);
     }
+
+    public async Task<IncomeDto> CreateIncome(
+        CreateIncomeDto input,
+        [Service] KakeiboDbContext db,
+        [Service] IMapper mapper
+    )
+    {
+        var entity = mapper.Map<Income>(input);
+        db.Incomes.Add(entity);
+        await db.SaveChangesAsync();
+        return mapper.Map<IncomeDto>(entity);
+    }
 }

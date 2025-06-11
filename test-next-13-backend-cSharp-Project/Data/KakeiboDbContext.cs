@@ -12,7 +12,6 @@ public class KakeiboDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Budget> Budgets { get; set; }
-
     public DbSet<Income> Incomes { get; set; }
 
 
@@ -43,6 +42,14 @@ public class KakeiboDbContext : DbContext
             .WithMany(bu => bu.Incomes)
             .HasForeignKey(i => i.BudgetId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Income>()
+            .Property(i => i.ReceivedAmountDate)
+            .HasConversion(
+                v => v.ToDateTime(TimeOnly.MinValue), // To database
+                v => DateOnly.FromDateTime(v) // From database
+            )
+            .HasColumnType("timestamp with time zone"); // Match existing Postgres type
 
 
         // User

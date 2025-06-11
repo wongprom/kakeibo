@@ -10,7 +10,6 @@ public sealed class IncomeProfile : Profile
     public IncomeProfile()
     {
         CreateMap<Income, IncomeDto>();
-        // If you later add: CreateIncomeDto, map that too
-        // CreateMap<CreateIncomeDto, Income>();
+        CreateMap<CreateIncomeDto, Income>();
     }
 }
