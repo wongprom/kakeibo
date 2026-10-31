@@ -4,8 +4,9 @@ Bot Development Kit (BDK) project (`@cursor/bdk`). This file is
 for coding agents editing the project. The served agent's prompt is
 `bot/instructions.md`.
 
-Kakeibo tech lead / router. Peer connection: `bot/mcp-connections/architect.ts`
-→ agent slug `architect`.
+Kakeibo tech lead / router. Peer connections:
+`bot/mcp-connections/architect.ts` → `architect`,
+`bot/mcp-connections/coder.ts` → `coder`.
 
 ## Loop
 
@@ -21,23 +22,23 @@ Run the CLI under Node, never Bun.
 
 ## Multi-agent
 
-Must be served with `architect` as a sibling so the peer connection resolves:
+Must be served with `architect` and `coder` as siblings so peers resolve:
 
 ```bash
 npx --yes "@cursor/bdk@0.2.25" dev ../
 ```
 
-Single-agent `dev` in this directory alone will warn/omit the peer.
+Single-agent `dev` in this directory alone will warn/omit peers.
 
 ## Layout
 
 - `bot/instructions.md` is the always-on prompt. Keep it short.
-- `bot/mcp-connections/architect.ts` is the one-way peer to the architect.
+- `bot/mcp-connections/*.ts` are one-way peers to specialists.
 - `evals/` is filesystem evals (`evals/evals.config.ts` required).
   Not `bot/evals/`. That path is ignored.
 
 ## Do not
 
-- Wire reciprocal architect → lead peer routes.
-- Add coder/designer/tester/deployer peers until step 1 handshake is proven.
+- Wire reciprocal specialist → lead peer routes.
+- Add designer/tester/deployer peers until coder handoff is proven.
 - Add npm deps on a first cut. Stick to what `@cursor/bdk` already ships.
