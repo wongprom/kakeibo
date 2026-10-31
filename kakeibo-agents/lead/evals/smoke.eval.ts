@@ -30,5 +30,18 @@ export default defineEval({
         t.check(t.reply, includes(/coder|implement|BudgetMutation|CreateBudget/i));
       },
     },
+    {
+      id: "routes-frontend",
+      description:
+        "Lead recognizes frontend/BFF work and mentions frontend-coder.",
+      async test(t) {
+        await t.send(
+          "Please add a Next.js BFF route and a stub /projects/kakeibo page. Use the frontend-coder peer; do not write the code yourself.",
+        );
+        t.succeeded();
+        t.check(t.reply, includes(/frontend-coder|bff|projects\/kakeibo|next\.js/i));
+      },
+    },
   ],
 });
+

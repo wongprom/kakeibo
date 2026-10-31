@@ -1,55 +1,49 @@
 # Kakeibo agent team (BDK)
 
 **BDK** (Bot Development Kit) is Cursor’s framework for defining agents as
-versioned Markdown + TypeScript. You write instructions, tools, skills, and
-evals; Cursor runs the model loop. Docs: https://cursor.com/docs/bdk
+versioned Markdown + TypeScript. Docs: https://cursor.com/docs/bdk
 
-## Current layout (step 2)
+## Current layout (step 3)
 
 | Agent | Role |
 | --- | --- |
-| `lead` | User-facing router. Delegates to peers. |
-| `architect` | Advisory specialist: schema, EF relations, GraphQL shape, migrations. No code edits. |
-| `coder` | Implements backend changes in the real C# checkout (`local.workspaceDir` = repo root). |
+| `lead` | User-facing router |
+| `architect` | Advisory schema / GraphQL / migrations |
+| `coder` | Backend implementer (C# checkout) |
+| `frontend-coder` | Frontend + Next.js BFF (`test-next-13`, `/projects/kakeibo`) |
 
-Later (not yet): `designer`, `tester`, `deployer` as peer agents.
+Later: `designer`, `tester`, `deployer`.
 
-Peers are one-way: **lead → architect**, **lead → coder**.
+Peers (one-way): lead → architect, coder, frontend-coder.
+
+## Product locks
+
+- Full app at `/projects/kakeibo`
+- Browser → Next.js BFF → C# HotChocolate
+- v1: plan month + log spending + review
+- Repos stay separate: `kakeibo` + `test-next-13`
+
+## Local layout for frontend-coder
+
+```text
+parent/
+  kakeibo/          # this repo
+  test-next-13/     # sibling clone
+```
+
+Or set `KAKEIBO_FRONTEND_ROOT` to the absolute path of `test-next-13`.
 
 ## Run locally (playground)
 
 ```bash
-# from repo root — mounts all agents under one process
+# from kakeibo repo root
 npx --yes "@cursor/bdk@0.2.25" dev ./kakeibo-agents
-
-# playground URLs are printed; typical:
-#   http://127.0.0.1:3000/          (home — lists agents)
-#   http://127.0.0.1:3000/lead/playground
-#   http://127.0.0.1:3000/architect/playground
-#   http://127.0.0.1:3000/coder/playground
+# open http://127.0.0.1:3000/lead/playground
 ```
 
-Talk to **lead**. Architecture → `architect`. Implementation → `coder`
-(usually after a plan). Confirm handoffs on the specialist’s **Runs** tab
-(`type: mcp`).
+Confirm handoffs on each specialist’s **Runs** tab (`type: mcp`).
 
-Model turns need a Cursor credential (`npx @cursor/bdk login` or
-`CURSOR_API_KEY`).
+## Caution
 
-## Per-agent checks
-
-```bash
-npx --yes "@cursor/bdk@0.2.25" validate --dir ./kakeibo-agents
-npx --yes "@cursor/bdk@0.2.25" info --dir ./kakeibo-agents/coder --json
-```
-
-## Memory
-
-Each agent journals turns via `bot/hooks/memory.ts` (`memoryHook`) into
-`memory/journal.jsonl` under the project state directory. That is the BDK
-memory path — not a hand-maintained markdown file.
-
-## Caution (coder)
-
-`coder` writes into your local git working tree. Use a clean branch, review
-diffs, and stop `dev` with Ctrl+C when finished.
+`coder` and `frontend-coder` write into real git working trees. Use clean
+branches, review diffs, stop with Ctrl+C.
