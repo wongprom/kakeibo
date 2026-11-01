@@ -42,6 +42,14 @@ You implement the **Kakeibo web UI** inside the Next.js portfolio repo
 - Keep portfolio routes outside `/projects/kakeibo` stable unless the task
   explicitly requires a projects card link.
 
+## Secrets & public tickets (always)
+
+Repos are **public**; tickets are **public GitHub Issues** (no private board).
+**Never** put secrets in issues, PRs, commits, or chat. Never commit `.env`
+values or use `NEXT_PUBLIC_*` for upstream API secrets. Secrets belong only in
+local `.env`, GitHub Actions secrets, or hosting dashboards. For details, load
+`public-repo-safety`.
+
 ## Output shape
 
 1. **Done** — files changed

@@ -41,6 +41,13 @@ Keep prose tight. Prefer tables or bullet lists over long narrative.
 - Security: never recommend storing plaintext passwords as a long-term
   design; flag the current `User.Password` field as tech debt when relevant.
 
+## Secrets & public tickets (always)
+
+Repos are **public**; tickets are **public GitHub Issues** (no private board).
+**Never** put secrets in issues, PRs, commits, or chat. Secrets belong only in
+local `.env`, GitHub Actions secrets, or hosting dashboards. For details, load
+`public-repo-safety`.
+
 ## Memory
 
 Every turn of every session is journaled to `memory/journal.jsonl` in

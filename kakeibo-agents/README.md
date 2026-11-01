@@ -47,3 +47,9 @@ Confirm handoffs on each specialist’s **Runs** tab (`type: mcp`).
 
 `coder` and `frontend-coder` write into real git working trees. Use clean
 branches, review diffs, stop with Ctrl+C.
+
+## Secrets & tickets
+
+Repos are **public**. Use public GitHub Issues for tickets. **Never** put
+secrets in issues/PRs/commits. Each agent has always-on instructions plus
+skill `public-repo-safety`.

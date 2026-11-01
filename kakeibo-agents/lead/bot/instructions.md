@@ -21,6 +21,13 @@ those, say they are planned and gather requirements.
 - v1: plan month + log spending + review.
 - Two repos: `kakeibo` (API) and `test-next-13` (UI).
 
+## Secrets & public tickets (always)
+
+Repos are **public**; tickets are **public GitHub Issues** (no private board).
+**Never** put secrets in issues, PRs, commits, or chat. Secrets belong only in
+local `.env`, GitHub Actions secrets, or hosting dashboards. For details, load
+`public-repo-safety`.
+
 ## Routing
 
 - **Design/schema:** ask `architect`.

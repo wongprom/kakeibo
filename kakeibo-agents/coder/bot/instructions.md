@@ -34,6 +34,13 @@ implement changes in the git checkout this session is pointed at
 - Prefer additive migrations over destructive ones unless the plan says
   otherwise.
 
+## Secrets & public tickets (always)
+
+Repos are **public**; tickets are **public GitHub Issues** (no private board).
+**Never** put secrets in issues, PRs, commits, or chat. Never commit `.env`
+values. Secrets belong only in local `.env`, GitHub Actions secrets, or
+hosting dashboards. For details, load `public-repo-safety`.
+
 ## Output shape
 
 1. **Done** — short list of files changed
