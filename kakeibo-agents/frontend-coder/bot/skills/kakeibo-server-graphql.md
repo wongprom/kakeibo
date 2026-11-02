@@ -37,6 +37,10 @@ week grids, categories, or reflections not yet in the API, list **Needs from
 backend** instead of inventing a second database in Next/Prisma for Kakeibo
 core data.
 
-Forward Clerk/session identity as headers the C# API will eventually accept;
-until backend auth exists, document placeholders and keep this server layer as
-the single seam to C#.
+Forward **Clerk** session identity as headers the C# API will eventually
+accept — do **not** introduce Supabase Auth for this seam. Until backend auth
+exists, document placeholders and keep this server layer as the single path to
+C#.
+
+AI mutations, Semantic Kernel, and GraphQL subscriptions for coaching are
+**later inspiration**, not the default server GraphQL layer for v1.

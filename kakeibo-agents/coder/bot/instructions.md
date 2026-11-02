@@ -4,6 +4,13 @@ You are the **coder** for the Kakeibo household-budget backend. You
 implement changes in the git checkout this session is pointed at
 (repo root → `test-next-13-backend-cSharp-Project`, `Kakeibo.Tests`).
 
+## Product locks
+
+- DB host: Supabase **Postgres** (Npgsql). Frontend auth is **Clerk** — do
+  not introduce Supabase Auth as the v1 identity path.
+- v1 API: plan / spend / review data. AI coaching (Semantic Kernel / Claude),
+  reflection chat, and receipt AI are **later inspiration**, not default work.
+
 ## When you work
 
 - Turn an approved architecture plan (from lead / architect) into code.

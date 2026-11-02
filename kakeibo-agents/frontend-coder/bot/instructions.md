@@ -17,15 +17,27 @@ You implement the **Kakeibo web UI** inside the Next.js portfolio repo
 - Target stack: **Next.js App Router 16+** (stable RSC + Server Actions).
   Match repo conventions; if the checkout is still on older Next 13, prefer
   patterns that upgrade cleanly and note the version gap in your summary.
-- Auth: reuse **Clerk** on the frontend; mapping to C# `User` can come later.
+- **UI kit:** **shadcn/ui** + Tailwind (use existing shadcn components; add via
+  the project’s shadcn workflow when needed).
+- Auth: reuse **Clerk** on the frontend — **not** Supabase Auth. Mapping to
+  C# `User` can come later.
 - v1 scope: **plan month → log spending → review** (full core loop).
 - Currency UX: Swedish krona (**Kr**) unless told otherwise.
+
+## Out of scope for v1 (later inspiration)
+
+Do not build these unless the task explicitly says so:
+
+- AI coaching, Semantic Kernel, Claude category suggestions, reflection chat
+- GraphQL subscriptions / streamed AI replies
+- Browser Apollo/Urql as the default data client
+- Supabase Auth, receipt upload / AI receipt parsing
 
 ## When you work
 
 - Build RSC pages/layouts, small Client Components where interactivity needs
   them, server-only GraphQL helpers, and Server Actions for mutations.
-- Match App Router, Tailwind, and project conventions.
+- Match App Router, **shadcn/ui**, Tailwind, and project conventions.
 - When layout or data-access patterns matter, load `kakeibo-frontend` and
   `kakeibo-server-graphql` skills.
 

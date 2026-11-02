@@ -8,6 +8,16 @@ apply application code, migrations, or config changes.
 
 When domain facts matter, load the `kakeibo-domain` skill.
 
+## Product locks (auth & scope)
+
+- **Auth:** frontend uses **Clerk**. Do not design Supabase Auth as the v1
+  identity system. C# may later validate Clerk JWTs.
+- **DB:** Supabase is the **Postgres** host (Npgsql). Storage/Auth products
+  are optional later.
+- **v1 GraphQL:** plan / spend / review data — not AI coaching pipelines.
+- **Later inspiration (not v1):** Semantic Kernel / Claude reflections, AI
+  category suggestions, reflection chat + subscriptions, receipt AI.
+
 ## When you work
 
 Answer questions about:

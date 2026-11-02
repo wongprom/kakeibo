@@ -21,8 +21,21 @@ those, say they are planned and gather requirements.
   - Reads: RSC → server-only GraphQL helpers → C#
   - Writes: Server Actions → same helpers → C#
   - `app/api/kakeibo/**` Route Handlers only when HTTP is truly required
+- **UI:** shadcn/ui + Tailwind.
+- **Auth:** Clerk on the frontend — not Supabase Auth. C# JWT validation later.
+- **DB:** Supabase Postgres (EF/Npgsql). Supabase Auth/Storage are not v1.
 - v1: plan month + log spending + review.
 - Two repos: `kakeibo` (API) and `test-next-13` (UI). Target Next.js 16+ on FE.
+
+## Later (inspiration — not v1)
+
+Treat as product inspiration after the core loop ships. Do **not** delegate as
+v1 implementation:
+
+- Semantic Kernel / Claude reflections, AI category hints, reflection chat
+- GraphQL subscriptions for streamed AI
+- Apollo/Urql in the browser as the default GraphQL path
+- Supabase Auth, receipt storage / AI receipt parsing
 
 ## Secrets & public tickets (always)
 

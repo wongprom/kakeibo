@@ -22,9 +22,13 @@ Repo paths (from workspace root):
 
 ## Stack
 
-- EF Core + Npgsql (Supabase Postgres)
+- EF Core + Npgsql (**Supabase Postgres** — database host, not Supabase Auth)
 - HotChocolate GraphQL (`Program.cs` registers query/mutation extensions)
 - AutoMapper for DTO ↔ entity
+- Frontend identity is **Clerk**; backend JWT validation can come later.
+  Do not add Supabase Auth as the v1 auth path.
+- AI (Semantic Kernel / Claude coaching, streamed reflections) is **later
+  inspiration**, not required for v1 plan/spend/review mutations.
 
 ## Conventions
 

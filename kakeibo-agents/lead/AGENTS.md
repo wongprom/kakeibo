@@ -36,10 +36,12 @@ Single-agent `dev` in this directory alone will warn/omit peers.
 - `evals/` is filesystem evals (`evals/evals.config.ts` required).
   Not `bot/evals/`. That path is ignored.
 
-## Product locks (frontend data)
+## Product locks (frontend)
 
 - Prefer RSC + server-only GraphQL + Server Actions.
 - Do not treat Route Handler BFF (`app/api/kakeibo/**`) as the default path.
+- UI kit: shadcn/ui + Tailwind. Auth: Clerk (not Supabase Auth).
+- AI / Semantic Kernel / Supabase Auth are later inspiration — not v1.
 
 ## Do not
 

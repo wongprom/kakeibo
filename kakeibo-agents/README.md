@@ -23,8 +23,20 @@ Peers (one-way): lead → architect, coder, frontend-coder.
   - Reads: RSC → server-only helpers → C# HotChocolate
   - Writes: Server Actions → same helpers → C#
   - Route Handlers only when HTTP is truly required
+- UI kit: **shadcn/ui** + Tailwind
+- Auth: **Clerk** on the frontend (not Supabase Auth)
+- DB: Supabase **Postgres** via EF Core / Npgsql (storage/auth products later if needed)
 - v1: plan month + log spending + review
 - Repos stay separate: `kakeibo` + `test-next-13` (FE target Next.js 16+)
+
+## Later (inspiration — not v1)
+
+Out of scope until the core loop works. Do not implement or route as v1 work:
+
+- AI coaching (Semantic Kernel / Claude), AI category suggestions, reflection chat
+- GraphQL subscriptions for streamed AI replies
+- Browser Apollo/Urql as the default data client (server-only layer stays default)
+- Supabase Auth replacing Clerk; receipt upload / AI receipt parsing
 
 ## Local layout for frontend-coder
 
