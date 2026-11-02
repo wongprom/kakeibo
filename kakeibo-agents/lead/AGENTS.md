@@ -36,6 +36,11 @@ Single-agent `dev` in this directory alone will warn/omit peers.
 - `evals/` is filesystem evals (`evals/evals.config.ts` required).
   Not `bot/evals/`. That path is ignored.
 
+## Product locks (frontend data)
+
+- Prefer RSC + server-only GraphQL + Server Actions.
+- Do not treat Route Handler BFF (`app/api/kakeibo/**`) as the default path.
+
 ## Do not
 
 - Wire reciprocal specialist → lead peer routes.

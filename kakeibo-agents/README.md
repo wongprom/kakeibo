@@ -10,7 +10,7 @@ versioned Markdown + TypeScript. Docs: https://cursor.com/docs/bdk
 | `lead` | User-facing router |
 | `architect` | Advisory schema / GraphQL / migrations |
 | `coder` | Backend implementer (C# checkout) |
-| `frontend-coder` | Frontend + Next.js BFF (`test-next-13`, `/projects/kakeibo`) |
+| `frontend-coder` | Frontend: RSC UI + server-only GraphQL + Server Actions (`test-next-13`) |
 
 Later: `designer`, `tester`, `deployer`.
 
@@ -19,9 +19,12 @@ Peers (one-way): lead → architect, coder, frontend-coder.
 ## Product locks
 
 - Full app at `/projects/kakeibo`
-- Browser → Next.js BFF → C# HotChocolate
+- Browser never calls C# GraphQL directly
+  - Reads: RSC → server-only helpers → C# HotChocolate
+  - Writes: Server Actions → same helpers → C#
+  - Route Handlers only when HTTP is truly required
 - v1: plan month + log spending + review
-- Repos stay separate: `kakeibo` + `test-next-13`
+- Repos stay separate: `kakeibo` + `test-next-13` (FE target Next.js 16+)
 
 ## Local layout for frontend-coder
 

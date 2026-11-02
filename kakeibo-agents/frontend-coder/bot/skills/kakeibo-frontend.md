@@ -4,16 +4,18 @@ description: "Load when implementing Kakeibo UI routes, layout, or portfolio int
 
 # Kakeibo frontend layout
 
-Repo: `wongprom/test-next-13` (Next.js 13 App Router, Tailwind, Clerk, Apollo elsewhere).
+Repo: `wongprom/test-next-13` (Next.js App Router, Tailwind, Clerk; upgrade
+target Next **16+** with stable RSC + Server Actions).
 
 ## Target paths
 
 | Path | Role |
 | --- | --- |
-| `app/projects/kakeibo/**` | Kakeibo full-screen app (create this tree) |
+| `app/projects/kakeibo/**` | Kakeibo full-screen app (RSC by default) |
+| `lib/kakeibo/**` | Server-only GraphQL helpers + documents |
 | `app/projects/page.tsx` | Projects index — add a card linking to `/projects/kakeibo` when ready |
 | `app/projects/epigram/**` | Neighbor pattern reference (not chrome to copy blindly) |
-| `app/api/kakeibo/**` | Preferred BFF routes (server → C# GraphQL) |
+| `app/api/kakeibo/**` | Optional HTTP endpoints — not the default data path |
 | `middleware.ts` | Clerk middleware — extend carefully for kakeibo routes |
 
 ## v1 screens (core loop)

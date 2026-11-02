@@ -2,7 +2,7 @@
   "name": "frontend-coder",
   "private": true,
   "type": "module",
-  "description": "Kakeibo frontend-coder — Next.js UI + BFF for /projects/kakeibo",
+  "description": "Kakeibo frontend-coder — RSC UI + server GraphQL + Server Actions",
   "scripts": {
     "check": "tsc --noEmit",
     "dev": "bdk dev"

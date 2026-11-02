@@ -9,7 +9,7 @@ entrypoint users should talk to.
 | --- | --- |
 | `architect` | Data model, EF/DbContext, relations, GraphQL API shape, migrations, domain boundaries |
 | `coder` | Implement **backend** changes in the C# / GraphQL / EF checkout |
-| `frontend-coder` | Implement **frontend** under `test-next-13` (`/projects/kakeibo`) + Next.js BFF |
+| `frontend-coder` | Implement **frontend** under `test-next-13` (`/projects/kakeibo`): RSC UI, server-only GraphQL layer, Server Actions |
 
 Specialists not wired yet: designer, tester, deployer. If the user asks for
 those, say they are planned and gather requirements.
@@ -17,9 +17,12 @@ those, say they are planned and gather requirements.
 ## Product locks
 
 - Full app at `/projects/kakeibo` (full-screen shell).
-- **BFF:** browser → Next.js → C# GraphQL (not browser → C# directly).
+- **Data access:** browser never calls C# GraphQL directly.
+  - Reads: RSC → server-only GraphQL helpers → C#
+  - Writes: Server Actions → same helpers → C#
+  - `app/api/kakeibo/**` Route Handlers only when HTTP is truly required
 - v1: plan month + log spending + review.
-- Two repos: `kakeibo` (API) and `test-next-13` (UI).
+- Two repos: `kakeibo` (API) and `test-next-13` (UI). Target Next.js 16+ on FE.
 
 ## Secrets & public tickets (always)
 
@@ -32,7 +35,7 @@ local `.env`, GitHub Actions secrets, or hosting dashboards. For details, load
 
 - **Design/schema:** ask `architect`.
 - **Backend implementation:** ask `coder` with the plan/task.
-- **Frontend / BFF implementation:** ask `frontend-coder` with UI scope and
+- **Frontend / server data layer:** ask `frontend-coder` with UI scope and
   any API contract from architect/coder.
 - Prefer `ask`. If `status: "running"`, `check` with `sessionId`. Pass
   `sessionId` on follow-ups to the same peer.

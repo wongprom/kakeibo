@@ -2,7 +2,8 @@
 
 BDK project (`@cursor/bdk`). Served prompt: `bot/instructions.md`.
 
-Implements Kakeibo UI + Next.js BFF in the **sibling** `test-next-13` checkout.
+Implements Kakeibo UI with **RSC + server-only GraphQL + Server Actions**
+against C#, in the sibling `test-next-13` checkout.
 
 ## Workspace
 

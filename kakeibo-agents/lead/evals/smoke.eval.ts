@@ -33,15 +33,19 @@ export default defineEval({
     {
       id: "routes-frontend",
       description:
-        "Lead recognizes frontend/BFF work and mentions frontend-coder.",
+        "Lead recognizes frontend server-data work and mentions frontend-coder.",
       async test(t) {
         await t.send(
-          "Please add a Next.js BFF route and a stub /projects/kakeibo page. Use the frontend-coder peer; do not write the code yourself.",
+          "Please add a stub /projects/kakeibo RSC page and a server-only GraphQL helper toward C#. Use the frontend-coder peer; do not write the code yourself.",
         );
         t.succeeded();
-        t.check(t.reply, includes(/frontend-coder|bff|projects\/kakeibo|next\.js/i));
+        t.check(
+          t.reply,
+          includes(/frontend-coder|server|rsc|projects\/kakeibo|next\.js/i),
+        );
       },
     },
+
   ],
 });
 
