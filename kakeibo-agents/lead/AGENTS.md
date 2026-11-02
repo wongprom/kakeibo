@@ -41,6 +41,8 @@ Single-agent `dev` in this directory alone will warn/omit peers.
 - Prefer RSC + server-only GraphQL + Server Actions.
 - Do not treat Route Handler BFF (`app/api/kakeibo/**`) as the default path.
 - UI kit: shadcn/ui + Tailwind. Auth: Clerk (not Supabase Auth).
+- Product language: English.
+- Kakeibo core (plan → spend → reflect, mindful friction) is non-negotiable.
 - AI / Semantic Kernel / Supabase Auth are later inspiration — not v1.
 
 ## Do not

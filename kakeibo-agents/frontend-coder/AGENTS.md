@@ -4,7 +4,9 @@ BDK project (`@cursor/bdk`). Served prompt: `bot/instructions.md`.
 
 Implements Kakeibo UI with **RSC + server-only GraphQL + Server Actions**
 against C#, **shadcn/ui** + Tailwind, and **Clerk** auth, in the sibling
-`test-next-13` checkout. AI / Supabase Auth are later — not v1.
+`test-next-13` checkout. Product copy is **English**. Kakeibo core
+(plan → spend → reflect) is non-negotiable. AI / Supabase Auth are later —
+not v1.
 
 ## Workspace
 

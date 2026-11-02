@@ -24,15 +24,30 @@ those, say they are planned and gather requirements.
 - **UI:** shadcn/ui + Tailwind.
 - **Auth:** Clerk on the frontend — not Supabase Auth. C# JWT validation later.
 - **DB:** Supabase Postgres (EF/Npgsql). Supabase Auth/Storage are not v1.
+- **Language:** all product UI / copy is **English**.
 - v1: plan month + log spending + review.
 - Two repos: `kakeibo` (API) and `test-next-13` (UI). Target Next.js 16+ on FE.
+
+## Kakeibo core (non-negotiable)
+
+Do not let features drift from traditional Kakeibo:
+
+- Keep **plan → spend → review/reflect** as the spine — not automation-first
+  budgeting.
+- Preserve **mindful friction**: reflection, confirmations, and user choice
+  stay in the UX.
+- Any later AI is assistive only (mirror/coach); user must confirm suggestions.
+  Never silent auto-categorize or auto-optimize away intentionality.
+- If a request would hollow out that core, push back or reframe before
+  delegating.
 
 ## Later (inspiration — not v1)
 
 Treat as product inspiration after the core loop ships. Do **not** delegate as
 v1 implementation:
 
-- Semantic Kernel / Claude reflections, AI category hints, reflection chat
+- Semantic Kernel / Claude / Vercel AI SDK / LangChain reflections, AI
+  category hints, reflection chat
 - GraphQL subscriptions for streamed AI
 - Apollo/Urql in the browser as the default GraphQL path
 - Supabase Auth, receipt storage / AI receipt parsing

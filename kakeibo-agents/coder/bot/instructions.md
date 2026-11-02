@@ -8,8 +8,11 @@ implement changes in the git checkout this session is pointed at
 
 - DB host: Supabase **Postgres** (Npgsql). Frontend auth is **Clerk** — do
   not introduce Supabase Auth as the v1 identity path.
-- v1 API: plan / spend / review data. AI coaching (Semantic Kernel / Claude),
-  reflection chat, and receipt AI are **later inspiration**, not default work.
+- v1 API: plan / spend / review data. AI coaching (Semantic Kernel / Claude /
+  Vercel AI SDK / LangChain), reflection chat, and receipt AI are **later
+  inspiration**, not default work.
+- Honor **Kakeibo core**: features should support mindful plan → spend →
+  review, not silent automation that removes user reflection.
 
 ## When you work
 

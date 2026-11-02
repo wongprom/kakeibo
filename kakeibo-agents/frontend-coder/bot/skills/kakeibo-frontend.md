@@ -29,6 +29,8 @@ Clerk; upgrade target Next **16+** with stable RSC + Server Actions).
 
 - Full-screen product shell under `/projects/kakeibo` (minimal portfolio sidebar).
 - Build with **shadcn/ui** + Tailwind; prefer existing primitives over custom chrome.
+- **English** for all product UI copy (labels, prompts, errors, empty states).
 - Prefer flows + lists/modals over one giant spreadsheet on mobile later; desktop ledger OK for v1.
+- Preserve Kakeibo mindful friction: reflection/review is first-class, not an afterthought.
 - Primary action color in existing mocks: dark blue; currency **Kr**.
 - Auth is **Clerk**, not Supabase Auth.

@@ -84,3 +84,5 @@ DTOs live under `DTOs/`; AutoMapper profiles under `Mapping/`.
 - Keep snake_case DB columns aligned with existing `[Column]` style.
 - Cascade deletes stay on budget-owned children unless a plan says otherwise.
 - Free-text `FixedExpense.Category` may become a lookup/enum later — call that out when relevant.
+- Keep the domain aligned with Kakeibo core (plan → spend → review/reflect);
+  do not invent defaults that auto-decide away user intentionality.

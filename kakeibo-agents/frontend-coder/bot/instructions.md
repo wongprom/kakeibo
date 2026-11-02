@@ -21,14 +21,26 @@ You implement the **Kakeibo web UI** inside the Next.js portfolio repo
   the project’s shadcn workflow when needed).
 - Auth: reuse **Clerk** on the frontend — **not** Supabase Auth. Mapping to
   C# `User` can come later.
+- **Language:** all product UI strings and in-app copy are **English**.
 - v1 scope: **plan month → log spending → review** (full core loop).
 - Currency UX: Swedish krona (**Kr**) unless told otherwise.
+
+## Kakeibo core (non-negotiable)
+
+- UX must support traditional Kakeibo: plan, log with intention, then
+  **review / reflect**. Do not ship “set and forget” automation that removes
+  that pause.
+- Prefer confirmations and reflective prompts over silent defaults that
+  decide categories or savings for the user.
+- Later AI may coach or suggest; the user always confirms. Never auto-apply
+  AI changes without an explicit action.
 
 ## Out of scope for v1 (later inspiration)
 
 Do not build these unless the task explicitly says so:
 
-- AI coaching, Semantic Kernel, Claude category suggestions, reflection chat
+- AI coaching (Semantic Kernel, Claude, Vercel AI SDK, LangChain), category
+  suggestions, reflection chat
 - GraphQL subscriptions / streamed AI replies
 - Browser Apollo/Urql as the default data client
 - Supabase Auth, receipt upload / AI receipt parsing

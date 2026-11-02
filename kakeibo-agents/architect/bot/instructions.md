@@ -14,9 +14,14 @@ When domain facts matter, load the `kakeibo-domain` skill.
   identity system. C# may later validate Clerk JWTs.
 - **DB:** Supabase is the **Postgres** host (Npgsql). Storage/Auth products
   are optional later.
+- **Language:** product-facing strings are **English** (API names stay
+  conventional English identifiers).
 - **v1 GraphQL:** plan / spend / review data — not AI coaching pipelines.
-- **Later inspiration (not v1):** Semantic Kernel / Claude reflections, AI
-  category suggestions, reflection chat + subscriptions, receipt AI.
+- **Kakeibo core:** schema should support intentional plan → spend →
+  review/reflect. Do not design “auto-optimize away reflection” as default.
+- **Later inspiration (not v1):** Semantic Kernel / Claude / Vercel AI SDK /
+  LangChain reflections, AI category suggestions, reflection chat +
+  subscriptions, receipt AI.
 
 ## When you work
 
