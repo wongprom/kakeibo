@@ -1,8 +1,7 @@
-# PR title here
+| Status  | Type  | Branch | Env Vars Change | Review App | Ticket |
+| :---: | :---: | :---: | :---: | :--: | :--: |
+| Ready/Hold | Feature/Bug/Tooling/Refactor/Hotfix/Patch/Cherry-Pick/Fix | `branch-name-here` | Yes/No | [Link](<Review app link here>) | [Link](<ticket link here>) |
 
-| Status  | Type  | Env Vars Change | Review App | Ticket |
-| :---: | :---: | :---: | :--: | :--: |
-| Ready/Hold | Feature/Bug/Tooling/Refactor/Hotfix | Yes/No | [Link](<Review app link here>) | [Link](<ticket link here>) |
 
 > ⚠️ NOTE: use notes like this to emphasize something about the PR. This could include other PRs this PR is built on top of; new or removed environment variables; reasons for why the PR is on hold; or anything else you would like to draw attention to.
 
@@ -63,5 +62,5 @@ General
 - [ ] My pull request represents one logical piece of work.
 - [ ] My commits are related to the pull request and look clean.
 - [ ] I have performed a self-review of my code
+- [ ] Vercel deployments pass with my changes
 - [ ] My code contains no conflicts and is up to date with the latest main branch
-
