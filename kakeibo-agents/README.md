@@ -3,7 +3,7 @@
 **BDK** (Bot Development Kit) is Cursor’s framework for defining agents as
 versioned Markdown + TypeScript. Docs: https://cursor.com/docs/bdk
 
-## Current layout (step 3)
+## Current layout (step 4)
 
 | Agent | Role |
 | --- | --- |
@@ -11,10 +11,11 @@ versioned Markdown + TypeScript. Docs: https://cursor.com/docs/bdk
 | `architect` | Advisory schema / GraphQL / migrations |
 | `coder` | Backend implementer (C# checkout) |
 | `frontend-coder` | Frontend: RSC UI + server-only GraphQL + Server Actions (`test-next-13`) |
+| `deployer` | Merges PRs on lead's ask (squash, green checks incl. Vercel) and checks Vercel deployments via GitHub |
 
-Later: `designer`, `tester`, `deployer`.
+Later: `designer`, `tester`.
 
-Peers (one-way): lead → architect, coder, frontend-coder.
+Peers (one-way): lead → architect, coder, frontend-coder, deployer.
 
 ## Product locks
 
@@ -76,7 +77,9 @@ Confirm handoffs on each specialist’s **Runs** tab (`type: mcp`).
 ## Caution
 
 `coder` and `frontend-coder` write into real git working trees. Use clean
-branches, review diffs, stop with Ctrl+C.
+branches, review diffs, stop with Ctrl+C. `deployer` can merge PRs via `gh`
+(only when lead asks, only with green checks, never into `main` without
+stated user approval) — keep `gh` auth scoped accordingly.
 
 ## Secrets & tickets
 
