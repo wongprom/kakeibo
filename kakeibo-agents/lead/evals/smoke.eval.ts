@@ -45,7 +45,18 @@ export default defineEval({
         );
       },
     },
-
+    {
+      id: "routes-deploy-check",
+      description:
+        "Lead delegates a Vercel deployment check to deployer instead of doing it itself.",
+      async test(t) {
+        await t.send(
+          "Did the latest main commit of wongprom/test-next-13 deploy to Vercel? Use the deployer peer; do not check yourself.",
+        );
+        t.succeeded();
+        t.check(t.reply, includes(/deployer|vercel|deploy|succeeded|failed|pending/i));
+      },
+    },
   ],
 });
 
