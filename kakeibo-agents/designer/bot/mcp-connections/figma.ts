@@ -1,13 +1,13 @@
 import { defineConnection } from "@cursor/bdk/connections";
 
-// Read-only Figma access through the Cursor account's Figma connector.
+// Read-only Figma access through the Cursor account's `figma` MCP (the Figma plugin).
 // Tokens stay on the Cursor backend; nothing is stored in this repo or on
-// the serve host. Authorize once in Cursor dashboard -> MCP (see README).
+// the serve host. Connect the Figma plugin once in the Cursor dashboard (see README).
 // `{ url: "https://mcp.figma.com/mcp", oauth: true }` is not used: Figma's
 // OAuth server answers 403 to BDK's dynamic client registration.
 export default defineConnection({
   cursorAccount: true,
-  servers: ["Figma"],
+  servers: ["figma"],
   advertiseTools: true,
   optional: true,
   tools: [

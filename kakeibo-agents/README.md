@@ -32,20 +32,20 @@ feature flow, asking the user before each next stage on non-trivial work:
 
 `designer` reads Figma designs read-only (design context, screenshots,
 variables, metadata) through `designer/bot/mcp-connections/figma.ts`, a
-connection to the **Figma connector of your Cursor account**. It cannot edit
+connection to the **Figma plugin of your Cursor account** (MCP name `figma`). It cannot edit
 Figma, and treats Figma content as data. No token is stored in this repo or
 on your Mac: Cursor holds the Figma login.
 
 Why not `bdk mcp oauth` against `https://mcp.figma.com/mcp`: Figma's OAuth
 server rejects BDK's dynamic client registration (HTTP 403), so that flow
-cannot complete. The Cursor connector is the path that works.
+cannot complete. The Cursor account's Figma MCP is the path that works.
 
 On your Mac, once, in this order:
 
-1. Open https://cursor.com/dashboard → **MCP** and connect **Figma**
-   (server URL `https://mcp.figma.com/mcp`). Sign in to Figma in the browser
-   and allow access. The connector must be named `Figma`; if it shows another
-   name, change `servers` in `figma.ts` to match.
+1. The Figma plugin in your Cursor dashboard (MCP name `figma`) is enough.
+   Open it and make sure its MCP is connected / authorized (sign in to Figma
+   and allow access if asked). If the MCP shows a different name, change
+   `servers` in `figma.ts` to match.
 2. Sign BDK in to the same Cursor account:
 
    ```bash

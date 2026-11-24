@@ -35,7 +35,7 @@ designer → lead route; lead gets the answer in the reply to its ask.
 ## Figma (read-only)
 
 `bot/mcp-connections/figma.ts` is a `cursorAccount: true` connection to the
-`Figma` connector of the signed-in Cursor account, with a `tools` allowlist
+`figma` MCP (the Figma plugin) of the signed-in Cursor account, with a `tools` allowlist
 of read-only tools. Tokens stay on the Cursor backend, so nothing secret is
 stored in the repo or on the serve host.
 
@@ -62,7 +62,7 @@ missing.
 
 ## Do not
 
-- Add Figma write tools to the `tools` allowlist, or widen `servers` beyond `Figma`.
+- Add Figma write tools to the `tools` allowlist, or widen `servers` beyond `figma`.
 - Commit Figma tokens, `mcp-auth.json`, or file links that carry secrets.
 - Add code-writing behavior or point `workspaceDir` at an app checkout.
 - Let specs drop the plan → spend → reflect intent or its mindful friction.
