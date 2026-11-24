@@ -57,6 +57,44 @@ export default defineEval({
         t.check(t.reply, includes(/deployer|vercel|deploy|succeeded|failed|pending/i));
       },
     },
+    {
+      id: "routes-design-spec",
+      description:
+        "Lead delegates a screen spec to designer instead of writing UI code.",
+      async test(t) {
+        await t.send(
+          "I need a UX spec for the Plan month screen: layout, shadcn components, copy and accessibility. Use the designer peer; do not write code yourself.",
+        );
+        t.succeeded();
+        t.check(t.reply, includes(/designer|spec|layout|shadcn|accessib/i));
+      },
+    },
+    {
+      id: "routes-verification",
+      description:
+        "Lead delegates verification of a PR to tester instead of running checks itself.",
+      async test(t) {
+        await t.send(
+          "Please verify PR 1 in wongprom/test-next-13: lint, build, and review against the product locks. Use the tester peer; do not check yourself.",
+        );
+        t.succeeded();
+        t.check(t.reply, includes(/tester|verify|lint|build|pass|fail|blocked/i));
+      },
+    },
+    {
+      id: "feature-flow-asks-before-next-stage",
+      description:
+        "Lead follows the default feature flow and checks in with the user before the next stage.",
+      async test(t) {
+        await t.send(
+          "I want a new feature: let users set a weekly allowance on the Plan month screen. How will we go about it? Plan the stages only; do not start work.",
+        );
+        t.succeeded();
+        t.check(t.reply, includes(/architect/i));
+        t.check(t.reply, includes(/designer/i));
+        t.check(t.reply, includes(/tester/i));
+      },
+    },
   ],
 });
 

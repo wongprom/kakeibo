@@ -5,7 +5,8 @@ for coding agents editing the project. The served agent's prompt is
 `bot/instructions.md`.
 
 Kakeibo tech lead / router. Peer connections:
-`architect`, `coder` (backend), `frontend-coder`, `deployer`.
+`architect`, `designer`, `coder` (backend), `frontend-coder`, `tester`,
+`deployer`.
 
 ## Loop
 
@@ -21,7 +22,7 @@ Run the CLI under Node, never Bun.
 
 ## Multi-agent
 
-Must be served with `architect`, `coder`, `frontend-coder`, and `deployer` as siblings so peers resolve:
+Must be served with `architect`, `designer`, `coder`, `frontend-coder`, `tester`, and `deployer` as siblings so peers resolve:
 
 ```bash
 npx --yes "@cursor/bdk@0.2.25" dev ../
@@ -33,6 +34,7 @@ Single-agent `dev` in this directory alone will warn/omit peers.
 
 - `bot/instructions.md` is the always-on prompt. Keep it short.
 - `bot/mcp-connections/*.ts` are one-way peers to specialists.
+- The routing table and default feature flow live in `bot/instructions.md`.
 - `evals/` is filesystem evals (`evals/evals.config.ts` required).
   Not `bot/evals/`. That path is ignored.
 
@@ -48,5 +50,5 @@ Single-agent `dev` in this directory alone will warn/omit peers.
 ## Do not
 
 - Wire reciprocal specialist → lead peer routes.
-- Add designer/tester peers until they exist (planned, not yet created).
+- Drop `tester` from the flow before `deployer`, or let lead merge, verify, or code itself.
 - Add npm deps on a first cut. Stick to what `@cursor/bdk` already ships.

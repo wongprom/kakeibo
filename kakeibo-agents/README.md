@@ -3,19 +3,30 @@
 **BDK** (Bot Development Kit) is Cursor’s framework for defining agents as
 versioned Markdown + TypeScript. Docs: https://cursor.com/docs/bdk
 
-## Current layout (step 4)
+## Current layout (step 5)
 
 | Agent | Role |
 | --- | --- |
 | `lead` | User-facing router |
 | `architect` | Advisory schema / GraphQL / migrations |
+| `designer` | Advisory UX/UI specs: screen structure, shadcn/ui components, copy, accessibility (no code) |
 | `coder` | Backend implementer (C# checkout) |
 | `frontend-coder` | Frontend: RSC UI + server-only GraphQL + Server Actions (`test-next-13`) |
+| `tester` | Verifies lint / typecheck / build / tests and reviews diffs against locks and acceptance criteria (read-mostly; no merge) |
 | `deployer` | Merges PRs on lead's ask (squash, green checks incl. Vercel) and checks Vercel deployments via GitHub |
 
-Later: `designer`, `tester`.
+Peers (one-way): lead → architect, designer, coder, frontend-coder, tester, deployer.
 
-Peers (one-way): lead → architect, coder, frontend-coder, deployer.
+## Workflow
+
+Lead delegates and summarizes; it never codes, merges or deploys. Default
+feature flow, asking the user before each next stage on non-trivial work:
+
+1. `architect` — data / API needs (skip if none)
+2. `designer` — screen spec
+3. `coder` (backend) and/or `frontend-coder` (UI)
+4. `tester` — verify against locks and acceptance criteria
+5. `deployer` — merge and Vercel check (only on the user's explicit ask, after `tester` passes)
 
 ## Product locks
 
@@ -76,7 +87,8 @@ Confirm handoffs on each specialist’s **Runs** tab (`type: mcp`).
 
 ## Caution
 
-`coder` and `frontend-coder` write into real git working trees. Use clean
+`coder` and `frontend-coder` write into real git working trees; `tester` runs
+checks in them (and adds test files only when lead asks). Use clean
 branches, review diffs, stop with Ctrl+C. `deployer` can merge PRs via `gh`
 (only when lead asks, only with green checks, never into `main` without
 stated user approval) — keep `gh` auth scoped accordingly.

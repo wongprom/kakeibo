@@ -1,0 +1,18 @@
+{
+  "name": "designer",
+  "private": true,
+  "type": "module",
+  "description": "Kakeibo designer agent — UX/UI specs and shadcn/ui component outlines for the Kakeibo screens",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "dev": "bdk dev"
+  },
+  "dependencies": {
+    "@cursor/bdk": "^0.2.25",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "typescript": "6.0.3"
+  }
+}
