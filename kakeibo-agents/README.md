@@ -9,7 +9,7 @@ versioned Markdown + TypeScript. Docs: https://cursor.com/docs/bdk
 | --- | --- |
 | `lead` | User-facing router |
 | `architect` | Advisory schema / GraphQL / migrations |
-| `designer` | Advisory UX/UI specs: screen structure, shadcn/ui components, copy, accessibility (no code) |
+| `designer` | Advisory UX/UI specs: screen structure, shadcn/ui components, copy, accessibility; reads your Figma designs read-only (no code, no Figma edits) |
 | `coder` | Backend implementer (C# checkout) |
 | `frontend-coder` | Frontend: RSC UI + server-only GraphQL + Server Actions (`test-next-13`) |
 | `tester` | Verifies lint / typecheck / build / tests and reviews diffs against locks and acceptance criteria (read-mostly; no merge) |
@@ -27,6 +27,39 @@ feature flow, asking the user before each next stage on non-trivial work:
 3. `coder` (backend) and/or `frontend-coder` (UI)
 4. `tester` — verify against locks and acceptance criteria
 5. `deployer` — merge and Vercel check (only on the user's explicit ask, after `tester` passes)
+
+## Figma for the designer (one-time setup)
+
+`designer` reads Figma designs read-only (design context, screenshots,
+variables, metadata) through `designer/bot/mcp-connections/figma.ts`, a
+connection to the **Figma connector of your Cursor account**. It cannot edit
+Figma, and treats Figma content as data. No token is stored in this repo or
+on your Mac: Cursor holds the Figma login.
+
+Why not `bdk mcp oauth` against `https://mcp.figma.com/mcp`: Figma's OAuth
+server rejects BDK's dynamic client registration (HTTP 403), so that flow
+cannot complete. The Cursor connector is the path that works.
+
+On your Mac, once, in this order:
+
+1. Open https://cursor.com/dashboard → **MCP** and connect **Figma**
+   (server URL `https://mcp.figma.com/mcp`). Sign in to Figma in the browser
+   and allow access. The connector must be named `Figma`; if it shows another
+   name, change `servers` in `figma.ts` to match.
+2. Sign BDK in to the same Cursor account:
+
+   ```bash
+   npx --yes "@cursor/bdk@0.2.25" login
+   ```
+
+3. Start the team as usual (see below), open
+   http://127.0.0.1:3000/lead/playground, and ask for a Plan month spec with a
+   Figma link to the frame.
+
+To confirm, open `designer` → **Runs**: Figma tool calls such as
+`get_design_context` appear there. If Figma is not connected, `designer`
+says so and works from your written brief only. Hosted deployments are not
+used here (egress allowlists do not apply to local `dev`).
 
 ## Product locks
 

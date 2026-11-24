@@ -7,6 +7,8 @@ description: "Load when specifying Kakeibo screens, shadcn/ui component choices,
 Target: `/projects/kakeibo` in `wongprom/test-next-13`. **shadcn/ui** +
 Tailwind, English copy, currency **Kr**, primary action dark blue.
 
+When the user supplies a Figma frame, also load `kakeibo-figma`.
+
 ## v1 screens
 
 | Screen | Purpose | Typical shadcn/ui components |
