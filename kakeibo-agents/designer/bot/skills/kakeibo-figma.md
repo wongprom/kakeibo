@@ -16,6 +16,10 @@ link if none was given.
 
 ## Tools (all read-only)
 
+Call `figma_list` first: it returns what is available and each tool's
+arguments. Then call a tool with `figma_read({ tool, arguments })`. The tools
+below are the only ones allowed; anything else is refused.
+
 | Need | Tool |
 | --- | --- |
 | Check access | `whoami` |
@@ -48,6 +52,6 @@ Start small: one frame at a time, `get_metadata` first for big frames.
 
 ## If Figma is unavailable
 
-Say that the connector is not authorized or not connected and point to the
+Quote the `errors` / `toolNamesSeen` from `figma_list` (names only, no secrets) and point to the
 Figma section of `kakeibo-agents/README.md`. Continue only from the written
 brief and mark the spec as **not checked against Figma**.

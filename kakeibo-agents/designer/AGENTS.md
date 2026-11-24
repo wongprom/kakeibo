@@ -34,35 +34,49 @@ designer → lead route; lead gets the answer in the reply to its ask.
 
 ## Figma (read-only)
 
-`bot/mcp-connections/figma.ts` is a `cursorAccount: true` connection to the
-`figma` MCP (the Figma plugin) of the signed-in Cursor account, with a `tools` allowlist
-of read-only tools. Tokens stay on the Cursor backend, so nothing secret is
-stored in the repo or on the serve host.
+Two host-only connections (`bot/host-connections/`, never shown to the model):
+
+- `figma.ts`: `cursorAccount: true`, the account's Figma plugin MCP. Tokens stay
+  on the Cursor backend; nothing secret is in the repo or on the serve host.
+- `figma-desktop.ts`: fallback to the Figma desktop app's local MCP
+  (`http://127.0.0.1:3845/mcp`, no token). Skipped silently if not running.
+
+The model only gets `bot/tools/figma_list.ts` and `figma_read.ts`. They use
+`bot/lib/figma.ts`, which holds the read-only allowlist and finds the real
+tool names: `cursorAccount` tool names may carry a connector prefix, so the
+wrapper matches a bare name or a `*figma*...-<tool>` name. Write tools are not
+in the allowlist and are refused.
+
+Why not the earlier setup (`cursorAccount` + `servers: ["figma"]` + advertised
+`tools` allowlist + `optional: true`): `servers` goes verbatim to Cursor's
+backend, which keys connectors by an internal identifier (`user-<name>`,
+`dashboard-<name>`, `dashboard-team-<id>-<name>`), and the exact-name `tools`
+filter matches only unprefixed names. Either mismatch yields no tools, and
+`optional: true` hides that, so the designer just said "Figma not available".
 
 Why not `{ url: "https://mcp.figma.com/mcp", oauth: true }`: BDK 0.2.25's
-`mcp oauth` registers a client dynamically, and Figma's registration endpoint
-answers 403 for it (checked), so that flow cannot complete. If Figma later
-allows it, the host-OAuth alternative stores tokens in
-`~/.config/agent-serve/mcp-auth.json` (mode 0600, outside the repo, or
-`$AGENT_SERVE_CONFIG_DIR`); never copy that file into the repo.
+`mcp oauth` registers a client dynamically and Figma answers 403 (checked).
+Never copy host-OAuth tokens (`~/.config/agent-serve/mcp-auth.json`) into the
+repo.
 
-One-time user setup is in `../README.md` (Figma section). `optional: true`
-keeps the designer running without Figma; its prompt says so when tools are
-missing.
+Inspect what the designer really sees (running `dev`):
+`curl -s http://127.0.0.1:3000/designer/v1/tools`, or
+`npx --yes "@cursor/bdk@0.2.25" call figma_list --dir ./kakeibo-agents/designer`.
+User setup is in `../README.md`.
 
 ## Layout
 
 - `bot/instructions.md` is the always-on prompt. Keep it short.
 - `bot/skills/kakeibo-ux.md` is on-demand screen and component guidance.
 - `bot/skills/kakeibo-figma.md` is on-demand Figma-to-spec translation guidance.
-- `bot/mcp-connections/figma.ts` is the read-only Figma connection.
+- `bot/host-connections/`, `bot/tools/figma_*.ts`, `bot/lib/figma.ts` are the read-only Figma access.
 - `bot/skills/public-repo-safety.md` is on-demand secrets guidance.
 - `evals/` is filesystem evals (`evals/evals.config.ts` required).
   Not `bot/evals/`. That path is ignored.
 
 ## Do not
 
-- Add Figma write tools to the `tools` allowlist, or widen `servers` beyond `figma`.
+- Add Figma write tools to `READ_ONLY_FIGMA_TOOLS`, or move the Figma connections out of `host-connections/`.
 - Commit Figma tokens, `mcp-auth.json`, or file links that carry secrets.
 - Add code-writing behavior or point `workspaceDir` at an app checkout.
 - Let specs drop the plan → spend → reflect intent or its mindful friction.

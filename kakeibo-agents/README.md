@@ -31,35 +31,44 @@ feature flow, asking the user before each next stage on non-trivial work:
 ## Figma for the designer (one-time setup)
 
 `designer` reads Figma designs read-only (design context, screenshots,
-variables, metadata) through `designer/bot/mcp-connections/figma.ts`, a
-connection to the **Figma plugin of your Cursor account** (MCP name `figma`). It cannot edit
-Figma, and treats Figma content as data. No token is stored in this repo or
-on your Mac: Cursor holds the Figma login.
+variables, metadata) with the tools `figma_list` / `figma_read`. It cannot edit
+Figma and treats Figma content as data. No token is stored in this repo or on
+your Mac: Cursor holds the Figma login. It tries the **Figma plugin of your
+Cursor account** first, then the Figma desktop app's local MCP as a fallback.
 
-Why not `bdk mcp oauth` against `https://mcp.figma.com/mcp`: Figma's OAuth
-server rejects BDK's dynamic client registration (HTTP 403), so that flow
-cannot complete. The Cursor account's Figma MCP is the path that works.
+(`bdk mcp oauth` against `https://mcp.figma.com/mcp` does not work: Figma
+rejects BDK's dynamic client registration with HTTP 403.)
 
 On your Mac, once, in this order:
 
-1. The Figma plugin in your Cursor dashboard (MCP name `figma`) is enough.
-   Open it and make sure its MCP is connected / authorized (sign in to Figma
-   and allow access if asked). If the MCP shows a different name, change
-   `servers` in `figma.ts` to match.
+1. In the Cursor dashboard, open the Figma plugin (MCP name `figma`) and make
+   sure its MCP is connected / authorized (sign in to Figma and allow access if
+   asked).
 2. Sign BDK in to the same Cursor account:
 
    ```bash
    npx --yes "@cursor/bdk@0.2.25" login
    ```
 
-3. Start the team as usual (see below), open
-   http://127.0.0.1:3000/lead/playground, and ask for a Plan month spec with a
-   Figma link to the frame.
+3. Start the team as usual (see below), then list what the designer actually
+   sees (names only, no secrets):
 
-To confirm, open `designer` → **Runs**: Figma tool calls such as
-`get_design_context` appear there. If Figma is not connected, `designer`
-says so and works from your written brief only. Hosted deployments are not
-used here (egress allowlists do not apply to local `dev`).
+   ```bash
+   curl -s http://127.0.0.1:3000/designer/v1/tools
+   ```
+
+   Look for `figma_list` and `figma_read`. To test Figma itself, run
+   `npx --yes "@cursor/bdk@0.2.25" call figma_list --dir ./kakeibo-agents/designer`
+   from the repo root: `available` should name tools such as
+   `get_design_context`; if empty, `errors` and `toolNamesSeen` say why, and
+   the `dev` terminal's "Cursor account MCP" lines show the exact connector
+   identifiers and their status.
+4. Ask lead for a Plan month spec with a Figma link to the frame.
+
+Fallback without the Cursor connector: open the Figma desktop app, enable its
+local MCP server (Dev Mode), keep the file open, and the designer uses it
+automatically. Hosted deployments are not used here (egress allowlists do not
+apply to local `dev`).
 
 ## Product locks
 
